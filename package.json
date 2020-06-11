@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-https": "ws --http2 --spa index.html",
+    "dev": "ws --spa index.html"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/jgbernalp/ar-store/issues"
   },
-  "homepage": "https://github.com/jgbernalp/ar-store#readme"
+  "homepage": "https://github.com/jgbernalp/ar-store#readme",
+  "devDependencies": {
+    "local-web-server": "^4.2.1"
+  }
 }
