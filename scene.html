@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <style>
+    html {
+      font-family: "Open Sans", sans-serif;
+    }
+    .a-enter-vr-button {
+      display: none;
+    }
+    #main {
+      position: absolute;
+      top: 80px;
+      left: 120px;
+    }
+  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    rel="stylesheet"
+  />
+  <body style="margin: 0px; overflow: hidden; background-color: #d3d4cf;">
+    <div id="main">
+      <h1>KORG</h1>
+      <h2>Matera: WildStand Collection</h2>
+
+      <p>Cesta marroquí</p>
+    </div>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="model" src="/model.glb"></a-asset-item>
+      </a-assets>
+
+      <a-entity light="type: ambient; color: #CCC"></a-entity>
+
+      <a-entity
+        light="type: point; intensity: 5; distance: 50; decay: 2"
+        position="10 10 10"
+      ></a-entity>
+
+      <a-entity
+        rotation="0 0 0"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear"
+      >
+        <a-entity gltf-model="#model"></a-entity>
+      </a-entity>
+
+      <a-entity id="rig" position="10 3 10" rotation="-15 45 0">
+        <a-camera fov="25" id="camera"></a-camera>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
