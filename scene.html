@@ -19,34 +19,92 @@
     rel="stylesheet"
   />
   <body style="margin: 0px; overflow: hidden; background-color: #d3d4cf;">
+    <a-scene
+      fog="type: linear; color: #d3d4cf; near:20; far:50"
+      shadow="type: pcfsoft"
+    >
+      <a-assets>
+        <a-asset-item id="model" src="model.obj"></a-asset-item>
+        <a-asset-item
+          id="material-gray"
+          src="materials/gray/gray.mtl"
+        ></a-asset-item>
+        <a-asset-item
+          id="material-beige"
+          src="materials/beige/beige.mtl"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-entity
+        light="type: ambient; color: #d3d4cf; intensity: 1.2"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 0.4; distance: 50; decay: 3; castShadow: true;shadowCameraVisible: true;"
+        position="10 10 10"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 0.4; distance: 50; decay: 3;castShadow: true;"
+        position="-10 10 10"
+      ></a-entity>
+
+      <a-entity
+        rotation="0 0 0"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear;"
+      >
+        <a-obj-model
+          shadow="cast: true"
+          id="cesta"
+          src="#model"
+          mtl="#material-gray"
+          shadow="receive: true"
+        ></a-obj-model>
+      </a-entity>
+
+      <a-plane
+        color="#d3d4cf"
+        height="100"
+        width="100"
+        rotation="-90 0 0"
+        shadow="receive: true"
+      ></a-plane>
+
+      <a-entity id="rig" position="0 3 13" rotation="-15 0 0">
+        <a-camera fov="25" id="camera" look-controls="enabled:true;"></a-camera>
+      </a-entity>
+    </a-scene>
+
     <div id="main">
       <h1>KORG</h1>
       <h2>Matera: WildStand Collection</h2>
 
       <p>Cesta marroquí</p>
+
+      <input
+        class="material-picker"
+        type="radio"
+        id="gray"
+        name="material"
+        value="material-gray"
+        checked
+      />
+      <label for="gray">Gris</label><br />
+      <input
+        class="material-picker"
+        type="radio"
+        id="beige"
+        name="material"
+        value="material-beige"
+      />
+      <label for="beige">Beige</label><br />
     </div>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="model" src="/model.glb"></a-asset-item>
-      </a-assets>
 
-      <a-entity light="type: ambient; color: #CCC"></a-entity>
-
-      <a-entity
-        light="type: point; intensity: 5; distance: 50; decay: 2"
-        position="10 10 10"
-      ></a-entity>
-
-      <a-entity
-        rotation="0 0 0"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear"
-      >
-        <a-entity gltf-model="#model"></a-entity>
-      </a-entity>
-
-      <a-entity id="rig" position="10 3 10" rotation="-15 45 0">
-        <a-camera fov="25" id="camera"></a-camera>
-      </a-entity>
-    </a-scene>
+    <script>
+      document.querySelectorAll(".material-picker").forEach((item) =>
+        item.addEventListener("change", (event) => {
+          const value = event.target.value;
+          document.querySelector("#cesta").setAttribute("mtl", `#${value}`);
+        })
+      );
+    </script>
   </body>
 </html>
